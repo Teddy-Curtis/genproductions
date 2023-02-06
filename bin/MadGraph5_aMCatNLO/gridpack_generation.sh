@@ -49,6 +49,15 @@ make_tarball () {
     XZ_OPT="$XZ_OPT" tar -cJpsf ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz mgbasedir process runcmsgrid.sh gridpack_generation*.log InputCards $EXTRA_TAR_ARGS
 
     echo "Gridpack created successfully at ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz"
+
+    echo "Transferring gridpack to EOS area: /eos/user/e/ecurtis/idmStudy/myFiles/${name}"
+  
+    
+    mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/;
+
+    mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    mv ${PRODHOME}/$LOGFILE_NAME /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
     echo "End of job"
 
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 0; else exit 0; fi
