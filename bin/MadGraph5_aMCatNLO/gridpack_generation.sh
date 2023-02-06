@@ -19,6 +19,10 @@
 #If QUEUE_SELECTION is omitted, then run on local machine only (using multiple cores)    #
 ##########################################################################################
 
+# I need to first change directory to my installation
+echo "Changing Directory"
+cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductionsNew/bin/MadGraph5_aMCatNLO
+
 # Create tarball with very aggressive xz settings.
 # (trade memory and cpu usage for compression ratio)
 make_tarball () {
@@ -175,6 +179,7 @@ make_gridpack () {
       #############################################
     
       cd $MGBASEDIRORIG
+      cp -r $PRODHOME/InertDoublet_UFO models/.
       cat $PRODHOME/patches/*.patch | patch -p1
       cp -r $PRODHOME/PLUGIN/CMS_CLUSTER/ PLUGIN/ 
       # Intended for expert use only!
