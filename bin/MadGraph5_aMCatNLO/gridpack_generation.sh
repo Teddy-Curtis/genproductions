@@ -21,7 +21,7 @@
 
 # I need to first change directory to my installation
 echo "Changing Directory"
-cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductionsNew/bin/MadGraph5_aMCatNLO
+cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
 
 # Create tarball with very aggressive xz settings.
 # (trade memory and cpu usage for compression ratio)
@@ -57,7 +57,7 @@ make_tarball () {
 
     mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
     mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
-    mv ${PRODHOME}/$LOGFILE_NAME /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
     echo "End of job"
 
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 0; else exit 0; fi
