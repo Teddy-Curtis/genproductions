@@ -53,11 +53,11 @@ make_tarball () {
     echo "Transferring gridpack to EOS area: /eos/user/e/ecurtis/idmStudy/myFiles/${name}"
   
     
-    mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/;
+    # mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/;
 
-    mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
-    mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
-    mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    # mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    # mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
+    # mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
     echo "End of job"
 
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 0; else exit 0; fi
