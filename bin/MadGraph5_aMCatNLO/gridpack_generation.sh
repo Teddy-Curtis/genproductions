@@ -20,8 +20,15 @@
 ##########################################################################################
 
 # I need to first change directory to my installation
-echo "Changing Directory"
-cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
+CURRENT_DIR=`pwd`
+if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
+    echo "Not changing directory, as running on Imperial servers"
+else
+    echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
+    cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
+fi
+
+
 
 # Create tarball with very aggressive xz settings.
 # (trade memory and cpu usage for compression ratio)
@@ -50,14 +57,22 @@ make_tarball () {
 
     echo "Gridpack created successfully at ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz"
 
-    echo "Transferring gridpack to EOS area: /eos/user/e/ecurtis/idmStudy/myFiles/${name}"
-  
-    
-    # mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/;
+    # Want to transfer files, but location depends on the server that I am running on
+    CURRENT_DIR=`pwd`
+    if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
+        echo "Running on Imperial servers, therefore transferring to /vols/cms/emc21/idmStudy/myFiles/gridpacks"
+        mkdir -p /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/;
+        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+        mv ${PRODHOME}/${name}/ /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+        mv $LOGFILE /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+    else
+        echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
+        mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/;
+        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+        mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+        mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem/${name}/
+    fi
 
-    # mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
-    # mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
-    # mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${name}/
     echo "End of job"
 
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 0; else exit 0; fi
