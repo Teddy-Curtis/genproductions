@@ -1,0 +1,5 @@
+import model InertDoublet_UFO
+define l+ = e+ mu+ 
+define l- = e- mu-
+generate p p > h2 h2 l+ l- j
+output h2h2lPlMj_lem_BP30 -nojpeg

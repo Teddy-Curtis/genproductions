@@ -1,10 +1,10 @@
 import os
 
 # These are the custom parameters for the run
-run_prefix = 'h2h2lPlM_lem'
+run_prefix = 'h2h2lPlMnunu_lem'
 # put a \n in between each line
-defines = 'define l+ = e+ mu+ \ndefine l- = e- mu-'
-process = 'p p > h2 h2 l+ l-'
+defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
+process = 'p p > h2 h2 l+ l- vl vl~'
 
 # Now create the folder for it
 try:
