@@ -61,16 +61,16 @@ make_tarball () {
     CURRENT_DIR=`pwd`
     if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
         echo "Running on Imperial servers, therefore transferring to /vols/cms/emc21/idmStudy/myFiles/gridpacks"
-        mkdir -p /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/;
-        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
-        mv ${PRODHOME}/${name}/ /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
-        mv $LOGFILE /vols/cms/emc21/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
+        mkdir -p /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
+        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+        mv ${PRODHOME}/${name}/ /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+        mv $LOGFILE /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
     else
         echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
-        mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/;
-        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
-        mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
-        mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/h2h2lPlM_lem_${cmssw_version}/${name}/
+        mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
+        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+        mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+        mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
     fi
 
     echo "End of job"
@@ -722,6 +722,11 @@ else
     fi
 fi
  
+#set cmssw 
+if [ -n "$7" ]; then
+    PROCESSNAME=${7}
+fi
+
 # jobstep can be 'ALL','CODEGEN', 'INTEGRATE', 'MADSPIN'
 
 if [ -z "$PRODHOME" ]; then
