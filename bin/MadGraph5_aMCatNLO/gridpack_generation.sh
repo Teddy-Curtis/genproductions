@@ -20,15 +20,15 @@
 ##########################################################################################
 
 # I need to first change directory to my installation
-CURRENT_DIR=`pwd`
-if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
-    echo "Not changing directory, as running on Imperial servers"
-else
-    echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
-    cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
-fi
+# CURRENT_DIR=`pwd`
+# if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
+#     echo "Not changing directory, as running on Imperial servers"
+# else
+#     echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
+#     cd /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
+# fi
 
-
+cd genproductions/bin/MadGraph5_aMCatNLO
 
 # Create tarball with very aggressive xz settings.
 # (trade memory and cpu usage for compression ratio)
@@ -58,20 +58,30 @@ make_tarball () {
     echo "Gridpack created successfully at ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz"
 
     # Want to transfer files, but location depends on the server that I am running on
-    CURRENT_DIR=`pwd`
-    if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
-        echo "Running on Imperial servers, therefore transferring to /vols/cms/emc21/idmStudy/myFiles/gridpacks"
-        mkdir -p /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
-        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-        mv ${PRODHOME}/${name}/ /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-        mv $LOGFILE /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-    else
-        echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
-        mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
-        mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-        mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-        mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
-    fi
+    # CURRENT_DIR=`pwd`
+    # if [ "${CURRENT_DIR:0:5}" = "/vols" ]; then
+    #     echo "Running on Imperial servers, therefore transferring to /vols/cms/emc21/idmStudy/myFiles/gridpacks"
+    #     mkdir -p /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
+    #     mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    #     mv ${PRODHOME}/${name}/ /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    #     mv $LOGFILE /vols/cms/emc21/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    # else
+    #     echo "Running on CERN servers, therefore changing directory to /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO"
+    #     mkdir -p /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/;
+    #     mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    #     mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    #     mv $LOGFILE /eos/user/e/ecurtis/idmStudy/myFiles/gridpacks/${PROCESSNAME}_${cmssw_version}/${name}/
+    # fi
+    echo "Created gridpack, now transferring to EOS area"
+    # Move back to the MadGraph directory in genproductions
+    cd ../../../..
+    pwd
+    ls
+    # Now move over to the EOS area
+    mkdir -p /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/;
+    mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
+    mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
+    mv $LOGFILE /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
 
     echo "End of job"
 
@@ -727,12 +737,18 @@ if [ -n "$7" ]; then
     PROCESSNAME=${7}
 fi
 
+# mkdir -p cards/
+echo "In the directory:"
+ls
+# # Now move all the cards into this
+# mv ${name}/ cards/.
+
 # jobstep can be 'ALL','CODEGEN', 'INTEGRATE', 'MADSPIN'
 
 if [ -z "$PRODHOME" ]; then
   PRODHOME=`pwd`
 fi 
-
+echo "Got here"
 # Folder structure is different on CMSConnect
 helpers_dir=${PRODHOME%genproductions*}/genproductions/Utilities
 helpers_file=${helpers_dir}/gridpack_helpers.sh
@@ -740,6 +756,7 @@ if [ ! -f "$helpers_file" ]; then
   if [ -f "${PRODHOME}/Utilities/gridpack_helpers.sh" ]; then
     helpers_dir=${PRODHOME}/Utilities
   else
+    echo "Here now " 
     helpers_dir=$(git rev-parse --show-toplevel)/bin/MadGraph5_aMCatNLO/Utilities
   fi
   helpers_file=${helpers_dir}/gridpack_helpers.sh
