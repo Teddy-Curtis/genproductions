@@ -4,7 +4,7 @@ import os
 run_prefix = 'h2h2lllnu_j_jj'
 # put a \n in between each line
 defines = 'define l = e+ mu+ e- mu- \ndefine vl = ve vm vt ve~ vm~ vt~'
-process = 'generate p p > h2 h2 l l l nu \nadd process p p > h2 h2 l l l nu j \nadd process p p > h2 h2 l l l nu j j'
+process = 'generate p p > h2 h2 l l l vl \nadd process p p > h2 h2 l l l vl j \nadd process p p > h2 h2 l l l vl j j'
 
 # Now create the folder for it
 try:
