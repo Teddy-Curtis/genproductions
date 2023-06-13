@@ -1,4 +1,4 @@
 import model InertDoublet_UFO
 <DEFINE>
-generate <PROCESS>
+<PROCESS>
 output <RUN_NAME> -nojpeg

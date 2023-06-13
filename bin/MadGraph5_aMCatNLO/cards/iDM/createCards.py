@@ -1,10 +1,10 @@
 import os
 
 # These are the custom parameters for the run
-run_prefix = 'h2h2lPlMnunu_lem_nuemt'
+run_prefix = 'h2h2lllnu_j_jj'
 # put a \n in between each line
-defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
-process = 'p p > h2 h2 l+ l- vl vl~'
+defines = 'define l = e+ mu+ e- mu- \ndefine vl = ve vm vt ve~ vm~ vt~'
+process = 'generate p p > h2 h2 l l l nu \nadd process p p > h2 h2 l l l nu j \nadd process p p > h2 h2 l l l nu j j'
 
 # Now create the folder for it
 try:
@@ -79,6 +79,8 @@ def saveFile(file, filename):
 
 
 for BP_num, params in enumerate(BP_params):
+    if BP_num > 20:
+        break
     BP_num += 1
     print(f'BP = {BP_num}')
     run_name = f'{run_prefix}_BP{BP_num}'
