@@ -1,32 +1,32 @@
 # This file creates all of the gridpacks, then sends them over the the myFiles
 # directory on EOS
 # Name of the process:
-tag = h2h2lPlM_lemt
-
-#scram_version=slc7_amd64_gcc700
-#CMSSW_version=CMSSW_10_6_19
-ncpus = 1
+tag = h2h2lllnu_j_jj
 
 # These define the arguments for input
-home = /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions/bin/MadGraph5_aMCatNLO
+scram_version=slc7_amd64_gcc700
+CMSSW_version=CMSSW_10_6_19
 run_name=$(tag)_BP$(item)
 run_folder=cards/iDM/$(tag)/$(run_name)
 
-Executable = $(home)/gridpack_generation.sh
+Executable = gridpack_generation.sh
 
+# have to do logging on afs
+home=/afs/cern.ch/user/e/ecurtis/idmStudy
 output = $(home)/logging/$(tag)_$(item).out
 error = $(home)/logging/$(tag)_$(item).err
 log = $(home)/logging/$(tag)_$(item).log
 
-#$(scram_version) $(CMSSW_version)
-arguments = $(run_name) $(run_folder) 
+
+arguments = $(run_name) $(run_folder) local ALL $(scram_version) $(CMSSW_version) $(tag)
+
+Transfer_Input_Files = /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-
 Universe = vanilla
 Initialdir = .
 getenv = False
-request_cpus = $(ncpus)
-+MaxRuntime = 43200
++JobFlavour = "nextweek"
 
-queue from seq 3 20 |
+queue from seq 1 20 |
+
