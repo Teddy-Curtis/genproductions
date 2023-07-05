@@ -1,0 +1,5 @@
+import model InertDoublet_UFO
+define l = e+ mu+ e- mu- 
+define vl = ve vm vt ve~ vm~ vt~
+generate p p > h2 h2 l l l vl
+output h2h2lllnu_BP26 -nojpeg
