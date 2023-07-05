@@ -79,9 +79,9 @@ make_tarball () {
     ls
     # Now move over to the EOS area
     mkdir -p /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/;
-    mv ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
-    mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
-    mv $LOGFILE /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
+    cp ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
+    #mv ${PRODHOME}/${name}/ /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
+    cp $LOGFILE /eos/user/e/ecurtis/idmStudyImperial/myFiles/gridpacks/${PROCESSNAME}/${name}/.
 
     echo "End of job"
 
