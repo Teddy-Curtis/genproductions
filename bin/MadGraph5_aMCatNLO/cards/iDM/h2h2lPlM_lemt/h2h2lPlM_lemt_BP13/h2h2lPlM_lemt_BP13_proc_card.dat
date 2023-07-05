@@ -1,5 +1,0 @@
-import model InertDoublet_UFO
-define l+ = e+ mu+ ta+ 
-define l- = e- mu- ta-
-generate p p > h2 h2 l+ l-
-output h2h2lPlM_lemt_BP13 -nojpeg

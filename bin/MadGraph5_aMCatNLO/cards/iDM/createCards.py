@@ -1,10 +1,10 @@
 import os
 
 # These are the custom parameters for the run
-run_prefix = 'h2h2lllnu_j_jj'
+run_prefix = 'h2h2lllnu_j'
 # put a \n in between each line
 defines = 'define l = e+ mu+ e- mu- \ndefine vl = ve vm vt ve~ vm~ vt~'
-process = 'generate p p > h2 h2 l l l vl \nadd process p p > h2 h2 l l l vl j \nadd process p p > h2 h2 l l l vl j j'
+process = 'generate p p > h2 h2 l l l vl \nadd process p p > h2 h2 l l l vl j'
 
 # Now create the folder for it
 try:
