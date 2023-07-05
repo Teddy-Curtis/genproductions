@@ -1,7 +1,7 @@
 # This file creates all of the gridpacks, then sends them over the the myFiles
 # directory on EOS
 # Name of the process:
-tag = h2h2lllnu_j_jj
+tag = h2h2lPlMnunu_lem_nuemt
 
 # These define the arguments for input
 scram_version=slc7_amd64_gcc700
@@ -23,10 +23,14 @@ arguments = $(run_name) $(run_folder) local ALL $(scram_version) $(CMSSW_version
 Transfer_Input_Files = /afs/cern.ch/user/e/ecurtis/idmStudy/genproductions
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
+Transfer_Output_Files = ""
 Universe = vanilla
 Initialdir = .
 getenv = False
 +JobFlavour = "nextweek"
+RequestCpus = 4
 
+#queue 1 in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+#queue 1 in (8, 9, 19, 20)
 queue from seq 1 20 |
 
