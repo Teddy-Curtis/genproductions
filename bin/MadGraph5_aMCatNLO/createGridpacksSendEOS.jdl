@@ -34,3 +34,7 @@ RequestCpus = 4
 #queue 1 in (8, 9, 19, 20)
 queue from seq 1 20 |
 
+
+#queue BP, lam2 from(
+#    10, 4
+#)
