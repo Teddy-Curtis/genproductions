@@ -3,7 +3,7 @@ import numpy as np
 
 # These are the custom parameters for the run
 mH = 120
-base_dir = f"mH{mH}2"
+base_dir = f"mH{mH}"
 run_prefix = 'h2h2lPlM'
 # put a \n in between each line
 defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
