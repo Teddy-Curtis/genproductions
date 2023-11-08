@@ -1,0 +1,7 @@
+import model InertDoublet_UFO
+define l+ = e+ mu+ 
+define l- = e- mu- 
+define vl = ve vm vt 
+define vl~ = ve~ vm~ vt~
+generate p p > h2 h2 l+ l- vl vl~
+output h2h2lPlMnunu_mH80_mA100_mHch130 -nojpeg
