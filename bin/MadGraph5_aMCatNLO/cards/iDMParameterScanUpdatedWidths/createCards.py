@@ -8,7 +8,7 @@ base_dir = f"mH{mH}"
 run_prefix = 'h2h2lPlMnunu'
 # put a \n in between each line
 defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
-process = 'generate p p > h2 h2 l+ l- vl vl~'
+process = 'generate p p > h2 h2 e+ e- vl vl~ \nadd process p p > h2 h2 mu+ mu- vl vl~'
 
 
 mAs = np.arange(mH, mH + 120, 10)
