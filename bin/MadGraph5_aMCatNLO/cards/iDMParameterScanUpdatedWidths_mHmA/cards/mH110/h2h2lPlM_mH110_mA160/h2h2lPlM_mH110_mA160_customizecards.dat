@@ -17,5 +17,5 @@ set param_card DECAY 23 auto
 set param_card DECAY 24 auto 
 set param_card DECAY 25 auto
 set param_card DECAY 35 0.000000e+00
-set param_card DECAY 36 1.0000
-set param_card DECAY 37 1.0000
+set param_card DECAY 36 0.0002223938
+set param_card DECAY 37 1.3056115337
