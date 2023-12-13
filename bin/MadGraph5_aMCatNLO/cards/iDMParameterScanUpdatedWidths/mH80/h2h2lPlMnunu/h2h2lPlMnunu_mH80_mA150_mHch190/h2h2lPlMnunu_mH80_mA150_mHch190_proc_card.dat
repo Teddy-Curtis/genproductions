@@ -3,5 +3,6 @@ define l+ = e+ mu+
 define l- = e- mu- 
 define vl = ve vm vt 
 define vl~ = ve~ vm~ vt~
-generate p p > h2 h2 l+ l- vl vl~
+generate p p > h2 h2 e+ e- vl vl~ 
+add process p p > h2 h2 mu+ mu- vl vl~
 output h2h2lPlMnunu_mH80_mA150_mHch190 -nojpeg
