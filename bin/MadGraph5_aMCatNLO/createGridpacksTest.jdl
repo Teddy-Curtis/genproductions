@@ -1,0 +1,38 @@
+# This file creates all of the gridpacks, then sends them over the the myFiles
+# directory on EOS
+# Name of the process:
+tag = h2h2lPlM
+outputname = TEST_h2h2lPlM_mH80_CMSSW_10_6_28_patch1
+
+# These define the arguments for input
+scram_version=slc7_amd64_gcc700
+CMSSW_version=CMSSW_10_6_28_patch1
+run_name=$(tag)_mH80_mA150_mHch160
+run_folder=cards/test_IDM/h2h2lPlM_mH80_mA150_mHch160
+
+Executable = gridpack_generation.sh
+
+# have to do logging on afs
+home=/afs/cern.ch/user/e/ecurtis/idmStudyImperial
+output = $(home)/logging/TEST_$(tag)_mH80_mA150_mHch160_updatedWidths.out
+error = $(home)/logging/TEST_$(tag)_mH80_mA150_mHch160_updatedWidths.err
+log = $(home)/logging/TEST_$(tag)_mH80_mA150_mHch160_updatedWidths.log
+
+
+arguments = $(run_name) $(run_folder) local ALL $(scram_version) $(CMSSW_version) $(outputname)
+
+Transfer_Input_Files = /afs/cern.ch/user/e/ecurtis/idmStudyImperial/MCproduction/genproductions
+#Transfer_Input_Files = /afs/cern.ch/user/e/ecurtis/idmStudyImperial/MCproduction/genproductions_compressed.tar.gz
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+Transfer_Output_Files = ""
+Universe = vanilla
+Initialdir = .
+getenv = False
+#+MaxRuntime=36000
++JobFlavour = "workday"
+RequestCpus = 4
+
+
+queue
+
