@@ -29,4 +29,4 @@ getenv=False
 RequestCpus = 1
 
 #! Change this below to loop over the correct directory!!!!
-queue mH, mA, mHch from mH80/input_arguments.txt
+queue mH, mA, mHch from mH70/input_arguments.txt

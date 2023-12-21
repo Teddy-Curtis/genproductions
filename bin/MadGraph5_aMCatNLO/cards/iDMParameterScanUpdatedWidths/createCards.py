@@ -3,12 +3,12 @@ import numpy as np
 import sys
 
 # These are the custom parameters for the run
-mH = 80
+mH = 70
 base_dir = f"mH{mH}"
-run_prefix = 'h2h2lPlMnunu'
+run_prefix = 'h2h2lPlM'
 # put a \n in between each line
 defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
-process = 'generate p p > h2 h2 e+ e- vl vl~ \nadd process p p > h2 h2 mu+ mu- vl vl~'
+process = 'generate p p > h2 h2 l+ l-'
 
 
 mAs = np.arange(mH, mH + 120, 10)
@@ -60,6 +60,11 @@ for i, mA in enumerate(mAs):
         print(f"{mH}, {mA}, {mHch}")
         run_name = f'{run_prefix}_mH{mH}_mA{mA}_mHch{mHch}'
         run_directory = f"{base_dir}/{run_prefix}/{run_name}"
+
+        # Check if it already exists, if it does skip it
+        if os.path.isdir(run_directory):
+            continue
+
         try:
             os.mkdir(run_directory)
         except:
