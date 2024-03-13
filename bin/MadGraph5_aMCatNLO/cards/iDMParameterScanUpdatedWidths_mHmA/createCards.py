@@ -2,16 +2,12 @@ import os
 import numpy as np
 import sys
 
-run_prefix = 'h2h2lPlM'
-
-# put a \n in between each line
-defines = 'define l+ = e+ mu+ \ndefine l- = e- mu- \ndefine vl = ve vm vt \ndefine vl~ = ve~ vm~ vt~'
-process = 'generate p p > h2 h2 l+ l-'
+run_prefix = 'idm_all_procs'
 
 # define the mass splittings
-mHs = np.arange(60, 120, 10)
-mAs = np.arange(60, 200, 10)
-
+mHs = np.arange(60, 140, 10)
+mAs = np.arange(60, 500, 10)
+mHch = 300
 base_dir = "cards"
 
 
@@ -30,13 +26,11 @@ else:
 
 files = ['_proc_card.dat', '_run_card.dat', '_customizecards.dat', '_extramodels.dat']
 
-def replaceInFile(file, defines, process, run_name, mH, mA):
-    file = file.replace("<DEFINE>", defines)
-    file = file.replace("<PROCESS>", process)
+def replaceInFile(file, run_name, mH, mA, mHch):
     file = file.replace("<RUN_NAME>", run_name)
     file = file.replace("<MH2>", str(mH))
     file = file.replace("<MH3>", str(mA))
-    file = file.replace("<MHPM>", str(250))
+    file = file.replace("<MHPM>", str(mHch))
     file = file.replace("<LAM2>", str(0.0))
     file = file.replace("<LAML>", str(0.0000000000001))
     return file
@@ -54,7 +48,7 @@ def saveFile(file, filename):
 
 for mH in mHs:
     for mA in mAs:
-        if not ((mH < mA) & ((mA - mH) <= 80) & (mA - mH > 20)):
+        if not ((mH < mA) & (mA - mH >= 20)) & (mA - mH <= 100):
             continue
 
         print(f"{mH}, {mA}")
@@ -70,7 +64,7 @@ for mH in mHs:
         for template_filename in files:
             file = readFile(template_filename)
 
-            file = replaceInFile(file, defines, process, run_name, mH, mA)
+            file = replaceInFile(file, run_name, mH, mA, mHch)
 
             filename = f'{run_name}{template_filename}'
             file_dir = f'{run_directory}/{filename}'

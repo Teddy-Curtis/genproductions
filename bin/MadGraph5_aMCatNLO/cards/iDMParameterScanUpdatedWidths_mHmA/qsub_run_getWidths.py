@@ -1,7 +1,8 @@
 import subprocess
 import os 
+import time
 
-process = "h2h2lPlM"
+process = "idm_all_procs"
 
 cmd = "pwd"
 status, work_dir = subprocess.getstatusoutput(cmd)
@@ -11,7 +12,7 @@ with open("cards/input_arguments.txt", "r") as f:
     lines = f.readlines()
     lines = [line.strip("\n") for line in lines]
 
-for line in lines[2:]:
+for line in lines[3:]:
     mH = int(line.split(",")[0])
     mA = int(line.split(" ")[1])
     print(mH, mA)
@@ -25,3 +26,6 @@ for line in lines[2:]:
     print(cmd)
     status, out = subprocess.getstatusoutput(cmd)
     print(out)
+
+    # Crashes otherwise, of fucking course
+    time.sleep(5)
