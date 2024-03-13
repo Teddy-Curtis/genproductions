@@ -1,0 +1,11 @@
+import model InertDoublet_UFO
+define l+ = e+ mu+ ta+
+define l- = e- mu- ta-
+define lall = e- mu- ta- e+ mu+ ta+
+define vl = ve vm vt
+define vl~ = ve~ vm~ vt~
+define vlall = ve vm vt ve~ vm~ vt~
+generate p p > l+ l-
+add process p p > l+ l- vl vl~
+add process p p > lall lall lall vlall
+output idm_all_procs_mH130_mA200 -nojpeg
