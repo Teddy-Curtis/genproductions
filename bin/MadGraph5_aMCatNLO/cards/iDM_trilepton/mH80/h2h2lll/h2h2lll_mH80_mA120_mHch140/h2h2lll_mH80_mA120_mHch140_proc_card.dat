@@ -1,0 +1,5 @@
+import model InertDoublet_UFO
+define lall = e+ mu+ e- mu- 
+define vlall = ve vm vt ve~ vm~ vt~
+generate p p > h2 h2 lall lall lall vlall
+output h2h2lll_mH80_mA120_mHch140 -nojpeg
