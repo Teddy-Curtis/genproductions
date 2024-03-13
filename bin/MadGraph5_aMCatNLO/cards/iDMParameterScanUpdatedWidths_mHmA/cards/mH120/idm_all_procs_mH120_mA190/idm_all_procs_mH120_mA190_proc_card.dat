@@ -5,7 +5,7 @@ define lall = e- mu- ta- e+ mu+ ta+
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 define vlall = ve vm vt ve~ vm~ vt~
-generate p p > l+ l-
-add process p p > l+ l- vl vl~
-add process p p > lall lall lall vlall
+generate p p > h2 h2 l+ l-
+add process p p > h2 h2 l+ l- vl vl~
+add process p p > h2 h2 lall lall lall vlall
 output idm_all_procs_mH120_mA190 -nojpeg
