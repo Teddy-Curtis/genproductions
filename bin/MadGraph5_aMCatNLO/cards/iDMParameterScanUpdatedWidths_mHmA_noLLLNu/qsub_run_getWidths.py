@@ -26,6 +26,5 @@ for line in lines:
     print(cmd)
     status, out = subprocess.getstatusoutput(cmd)
     print(out)
-    break 
     # Crashes otherwise, of fucking course
     time.sleep(5)
