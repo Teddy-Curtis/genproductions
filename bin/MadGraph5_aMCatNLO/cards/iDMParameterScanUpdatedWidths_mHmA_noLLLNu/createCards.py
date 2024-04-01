@@ -5,7 +5,7 @@ import sys
 run_prefix = 'idm_dilepton'
 
 # define the mass splittings
-mHs = np.arange(60, 140, 10)
+mHs = np.arange(140, 170, 10)
 mAs = np.arange(60, 500, 10)
 mHch = 300
 base_dir = "cards"
