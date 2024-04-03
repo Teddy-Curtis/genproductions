@@ -6,7 +6,7 @@ run_prefix = 'idm_dilepton'
 
 # define the mass splittings
 mHs = np.arange(60, 170, 10)
-mAs = np.arange(60, 500, 10)
+deltaAH = 95
 mHch = 300
 base_dir = "cards"
 
@@ -47,32 +47,29 @@ def saveFile(file, filename):
 
 
 for mH in mHs:
-    for mA in mAs:
-        if not ((mH < mA) & (mA - mH >= 20)) & (mA - mH <= 100):
-            continue
-
-        print(f"{mH}, {mA}")
-        run_name = f'{run_prefix}_mH{mH}_mA{mA}'
-        run_directory = f"{base_dir}/mH{mH}/{run_name}"
+    mA = mH + deltaAH
+    print(f"{mH}, {mA}")
+    run_name = f'{run_prefix}_mH{mH}_mA{mA}'
+    run_directory = f"{base_dir}/mH{mH}/{run_name}"
 
 
 
-        os.makedirs(run_directory, exist_ok=True)
+    os.makedirs(run_directory, exist_ok=True)
 
 
 
-        for template_filename in files:
-            file = readFile(template_filename)
+    for template_filename in files:
+        file = readFile(template_filename)
 
-            file = replaceInFile(file, run_name, mH, mA, mHch)
+        file = replaceInFile(file, run_name, mH, mA, mHch)
 
-            filename = f'{run_name}{template_filename}'
-            file_dir = f'{run_directory}/{filename}'
-            saveFile(file, file_dir)
-        
-        
-        with open(f"{base_dir}/input_arguments.txt", "a") as f:
-            f.write(f"{mH}, {mA}\n")
+        filename = f'{run_name}{template_filename}'
+        file_dir = f'{run_directory}/{filename}'
+        saveFile(file, file_dir)
+    
+    
+    with open(f"{base_dir}/input_arguments.txt", "a") as f:
+        f.write(f"{mH}, {mA}\n")
 
 
 
