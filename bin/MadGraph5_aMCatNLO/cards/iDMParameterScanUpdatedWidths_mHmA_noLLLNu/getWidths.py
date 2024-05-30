@@ -13,7 +13,7 @@ os.makedirs(f"tmp/base_{process}_mH{mH}_mA{mA}", exist_ok=True)
 os.chdir(f"tmp/base_{process}_mH{mH}_mA{mA}")
 
 # MadGraph dirdctory
-MG_dir = "/vols/cms/emc21/idmStudy/BPs/MG5_aMC_v2_6_7"
+MG_dir = "/vols/cms/emc21/idmStudy/BPs/MG5_aMC_v2_9_19"
 
 
 def getXS(particle):
@@ -45,7 +45,7 @@ with open(f'find_h3_decay_{process}_mH{mH}_mA{mH}.txt', 'w') as f:
     f.write('print_results --path=./cross_section_h3.txt --format=short\n')
 
 # Now run this
-cmd = f"python2 {MG_dir}/bin/mg5_aMC find_h3_decay_{process}_mH{mH}_mA{mH}.txt"
+cmd = f"python {MG_dir}/bin/mg5_aMC find_h3_decay_{process}_mH{mH}_mA{mH}.txt"
 status, out = subprocess.getstatusoutput(cmd)
 print(out)
 
@@ -71,7 +71,7 @@ with open(f'find_hch_decay_{process}_mH{mH}_mA{mH}.txt', 'w') as f:
     f.write('print_results --path=./cross_section_hch.txt --format=short\n')
 
 # Now run this
-cmd = f"python2 {MG_dir}/bin/mg5_aMC find_hch_decay_{process}_mH{mH}_mA{mH}.txt"
+cmd = f"python {MG_dir}/bin/mg5_aMC find_hch_decay_{process}_mH{mH}_mA{mH}.txt"
 status, out = subprocess.getstatusoutput(cmd)
 print(out)
 
