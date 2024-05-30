@@ -5,8 +5,8 @@ import sys
 run_prefix = 'idm_dilepton'
 
 # define the mass splittings
-mHs = np.arange(60, 170, 10)
-mAs = np.arange(60, 500, 10)
+mHs = list(np.arange(60, 190, 10))
+mAs = list(np.arange(60, 500, 10))
 mHch = 300
 base_dir = "cards"
 
@@ -45,36 +45,66 @@ def saveFile(file, filename):
         f.write(file)
 
 
+def makeFiles(mH, mA, mHch, run_prefix, base_dir, files):
+    run_name = f'{run_prefix}_mH{mH}_mA{mA}'
+    run_directory = f"{base_dir}/mH{mH}/{run_name}"
+
+
+
+    os.makedirs(run_directory, exist_ok=True)
+
+
+
+    for template_filename in files:
+        file = readFile(template_filename)
+
+        file = replaceInFile(file, run_name, mH, mA, mHch)
+
+        filename = f'{run_name}{template_filename}'
+        file_dir = f'{run_directory}/{filename}'
+        saveFile(file, file_dir)
+    
+    
+    with open(f"{base_dir}/input_arguments.txt", "a") as f:
+        f.write(f"{mH}, {mA}\n")
+
 
 for mH in mHs:
     for mA in mAs:
-        if not ((mH < mA) & (mA - mH >= 20)) & (mA - mH <= 100):
+        if not ((mH < mA) & (mA - mH >= 20) & (mA - mH <= 100)):
             continue
 
         print(f"{mH}, {mA}")
-        run_name = f'{run_prefix}_mH{mH}_mA{mA}'
-        run_directory = f"{base_dir}/mH{mH}/{run_name}"
+        continue
 
 
 
-        os.makedirs(run_directory, exist_ok=True)
 
+# Now add in the specific points
 
+# also add the mass splitting of 92
+mHs_92 = list(np.arange(60, 190, 10))
+deltaAH = 92
+mHch = 300
 
-        for template_filename in files:
-            file = readFile(template_filename)
+for mH in mHs_92:
+    mA = mH + deltaAH
+    if not ((mH < mA) & (mA - mH >= 20) & (mA - mH <= 100)):
+        continue
+    print(f"{mH}, {mA}")
 
-            file = replaceInFile(file, run_name, mH, mA, mHch)
+# Also add the validation points
+mHs_val = [85, 85, 115, 135, 165, 165]
+mAs_val = [120, 170, 180, 190, 200, 250]
+for mH, mA in zip(mHs_val, mAs_val):
+    mHs.append(mH)
+    mAs.append(mA)
 
-            filename = f'{run_name}{template_filename}'
-            file_dir = f'{run_directory}/{filename}'
-            saveFile(file, file_dir)
-        
-        
-        with open(f"{base_dir}/input_arguments.txt", "a") as f:
-            f.write(f"{mH}, {mA}\n")
-
-
-
+for mH, mA in zip(mHs_val, mAs_val):
+    if not ((mH < mA) & (mA - mH >= 20) & (mA - mH <= 100)):
+        print(f"Didnt work for {mH}, {mA}")
+        continue
+    print(mH, mA)
+    makeFiles(mH, mA, mHch, run_prefix, base_dir, files)
 
    
