@@ -7,7 +7,7 @@ log = /vols/cms/emc21/idmStudy/MCproduction/gridpackProduction/genproductions/bi
 RequestMemory = 12G
 
 process=idm_dilepton
-base_dir=/vols/cms/emc21/idmStudy/MCproduction/gridpackProduction/genproductions/bin/MadGraph5_aMCatNLO/cards/iDMParameterScanUpdatedWidths_mHmA_noLLLNu/cards/mH$(mH)
+base_dir=/vols/cms/emc21/idmStudy/MCproduction/gridpackProduction/genproductions/bin/MadGraph5_aMCatNLO/cards/iDMParameterScanUpdatedWidths_mHmA_noLLLNu/cards/13p6/mH$(mH)
 
 arguments = "$(mH) $(mA) idm_dilepton $(base_dir)"
 
