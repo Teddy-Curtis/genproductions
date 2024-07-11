@@ -60,7 +60,7 @@ def makeFiles(mH, mA, mHch, run_prefix, base_dir, files):
 
         file = replaceInFile(file, run_name, mH, mA, mHch)
 
-        if file = "_run_card_13p6TeV.dat":
+        if template_filename == "_run_card_13p6TeV.dat":
             template_filename = "_run_card.dat"
         
         filename = f'{run_name}{template_filename}'
@@ -78,7 +78,7 @@ for mH in mHs:
             continue
 
         print(f"{mH}, {mA}")
-        continue
+        makeFiles(mH, mA, mHch, run_prefix, base_dir, files)
 
 
 
@@ -94,6 +94,7 @@ for mH in mHs_92:
     mA = mH + deltaAH
     if not ((mH < mA) & (mA - mH >= 20) & (mA - mH <= 100)):
         continue
+    makeFiles(mH, mA, mHch, run_prefix, base_dir, files)
     print(f"{mH}, {mA}")
 
 # Also add the validation points
