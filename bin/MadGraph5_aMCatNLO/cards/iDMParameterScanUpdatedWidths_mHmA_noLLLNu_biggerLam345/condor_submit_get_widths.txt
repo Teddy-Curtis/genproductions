@@ -14,4 +14,4 @@ arguments = "$(mH) $(mA) $(mHch) $(lam) idm_dilepton $(base_dir)"
 +MaxRuntime = 7200
 +OnExitHold   = ExitStatus != 0
 getenv        = True
-queue mH, mA, mHch, lam from cards/test_arguments.txt
+queue mH, mA, mHch, lam from cards/input_arguments.txt
