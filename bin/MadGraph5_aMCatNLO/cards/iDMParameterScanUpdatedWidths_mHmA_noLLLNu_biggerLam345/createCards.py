@@ -83,8 +83,9 @@ masses = [
 param_points = []
 
 for mH, mA in masses:
-    param_points.append([mH, mA, mHch, getLam(mH)])
-    param_points.append([mH, mA, mHch, 8])
+    # param_points.append([mH, mA, mHch, getLam(mH)])
+    param_points.append([mH, mA, mHch, 1])
+    param_points.append([mH, mA, mHch, 2])
 
 for mH, mA, mHch, lam345 in param_points:
     makeFiles(mH, mA, mHch, lam345, run_prefix, base_dir, files)
